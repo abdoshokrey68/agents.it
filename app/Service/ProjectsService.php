@@ -7,9 +7,9 @@ use App\Models\Project;
 class ProjectsService
 {
     /**
-     * @return object
+     * @return object|null
      */
-    public function index(): object
+    public function index(): ?object
     {
         return Project::get();
     }
@@ -17,9 +17,9 @@ class ProjectsService
     /**
      * @param mixed $project_id
      *
-     * @return object or null
+     * @return object|null
      */
-    public function show ($project_id)
+    public function show($project_id): ?object
     {
         $project = Project::find($project_id);
         return $project;
@@ -28,9 +28,9 @@ class ProjectsService
     /**
      * @param mixed $request
      *
-     * @return object
+     * @return object|null
      */
-    public function store($request): object
+    public function store($request): ?object
     {
         $project =  Project::create($request);
         return $project;
@@ -40,9 +40,9 @@ class ProjectsService
      * @param mixed $request
      * @param mixed $project
      *
-     * @return object
+     * @return object|null
      */
-    public function update($request, $project): object
+    public function update($request, $project): ?object
     {
         $project->update($request);
         return $project;
@@ -51,9 +51,9 @@ class ProjectsService
     /**
      * @param mixed $project
      *
-     * @return object
+     * @return object|null
      */
-    public function delete($project): object
+    public function delete($project): ?object
     {
         $project->delete();
         return $project;

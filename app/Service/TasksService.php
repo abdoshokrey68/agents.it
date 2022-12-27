@@ -6,7 +6,10 @@ use App\Models\Task;
 
 class TasksService
 {
-    public function index(): object
+    /**
+     * @return object|null
+     */
+    public function index(): ?object
     {
         return Task::get();
     }
@@ -15,22 +18,33 @@ class TasksService
     /**
      * @param mixed $task_id
      *
-     * @return object or null
+     * @return object|null
      */
-    public function show ($task_id)
+    public function show($task_id): ?object
     {
         $task = Task::find($task_id);
         return $task;
     }
 
 
-    public function store($request)
+    /**
+     * @param mixed $request
+     *
+     * @return object|null
+     */
+    public function store($request): ?object
     {
         $task =  Task::create($request);
         return $task;
     }
 
-    public function update($input, $task)
+    /**
+     * @param mixed $input
+     * @param mixed $task
+     *
+     * @return object|null
+     */
+    public function update($input, $task): ?object
     {
         if (isset($input['status'])) {
             $input['status'] = 1;
@@ -42,12 +56,14 @@ class TasksService
         return $task;
     }
 
-    public function delete($task): object
+    /**
+     * @param mixed $task
+     *
+     * @return object|null
+     */
+    public function delete($task): ?object
     {
-        // $task = Task::find($id);
-
         $task->delete();
-
         return $task;
     }
 }
