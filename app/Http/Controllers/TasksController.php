@@ -11,27 +11,44 @@ use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
+    /**
+     * @var object
+     */
     protected $service;
 
+    /**
+     * @param TasksService $service
+     */
     public function __construct(TasksService $service)
     {
         $this->service = $service;
     }
 
-    public function index()
+    /**
+     * @return object
+     */
+    public function index() : object
     {
         $tasks = $this->service->index();
         return view('task.index', compact('tasks'));
     }
 
-    public function create()
+    /**
+     * @return object
+     */
+    public function create() : object
     {
         $projects = Project::get();
         $users = User::whereIsAdmin(false)->get();
         return view('task.create', compact('projects', 'users'));
     }
 
-    public function store(TasksRequest $request)
+    /**
+     * @param TasksRequest $request
+     *
+     * @return object
+     */
+    public function store(TasksRequest $request): object
     {
         $input = $request->all();
         $input['created_by'] = Auth::id();
@@ -39,21 +56,37 @@ class TasksController extends Controller
         return redirect()->route('task')->with('status', 'The task has been created successfully');
     }
 
-    public function edit(Task $task)
+    /**
+     * @param Task $task
+     *
+     * @return object
+     */
+    public function edit(Task $task): object
     {
         $projects = Project::get();
         $users  = User::get();
         return view('task.edit', compact('task', 'projects', 'users'));
     }
 
-    public function update(TasksRequest $request, Task $task)
+    /**
+     * @param TasksRequest $request
+     * @param Task $task
+     *
+     * @return object
+     */
+    public function update(TasksRequest $request, Task $task): object
     {
         $input = $request->all();
         $result = $this->service->update($input, $task);
         return redirect()->route('task')->with('status', 'The task has been updated successfully');
     }
 
-    public function delete(Task $task)
+    /**
+     * @param Task $task
+     *
+     * @return object
+     */
+    public function delete(Task $task): object
     {
         $result = $this->service->delete($task);
         return redirect()->route('task')->with('status', 'The task has been successfully deleted');

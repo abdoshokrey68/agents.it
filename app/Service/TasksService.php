@@ -11,6 +11,19 @@ class TasksService
         return Task::get();
     }
 
+
+    /**
+     * @param mixed $task_id
+     *
+     * @return object or null
+     */
+    public function show ($task_id)
+    {
+        $task = Task::find($task_id);
+        return $task;
+    }
+
+
     public function store($request)
     {
         $task =  Task::create($request);

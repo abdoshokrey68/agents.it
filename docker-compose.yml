@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  laravel-app:
+    build:
+      context: '.'
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
+    container_name: og-crm
+    ports:
+      - 8000:80
+    environment:
+      - APACHE_RUN_USER=#1000
+      - APACHE_RUN_GROUP=#1000
+    volumes:
+      - .:/var/www/html
+
+  mysql-db:
+    image: mysql:5.7
+    container_name: mysql-db-go-crm
+    restart: always
+    ports:
+      - '3308:3306'
+    volumes:
+      - og-crm:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: og_crm
+
+  phpmyadmin:
+    depends_on:
+      - mysql-db
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-og-crm
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql-db
+      UPLOAD_LIMIT: 300M
+volumes:
+  og-crm:
+    driver: local

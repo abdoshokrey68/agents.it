@@ -7,9 +7,19 @@ use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
-    public function tasks(): object
+    public function tasks($user_id): object
     {
-        return Task::get();
+        return Task::where('user_id', $user_id)->get();
+    }
+
+    /**
+     * @param mixed $task
+     *
+     * @return object or null
+     */
+    public function show($task_id)
+    {
+        return Task::where('user_id', auth()->id())->find($task_id);
     }
 
     public function update($input, $task): object

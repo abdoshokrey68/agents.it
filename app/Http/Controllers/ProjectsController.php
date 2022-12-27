@@ -11,48 +11,80 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
-    protected $service;
+    /**
+     * @var object
+     */
+    protected object $service;
 
+    /**
+     * @param ProjectsService $service
+     */
     public function __construct(ProjectsService $service)
     {
         $this->service = $service;
     }
 
-    public function index()
+    /**
+     * @return object
+     */
+    public function index(): object
     {
         $projects = $this->service->index();
         return view('project.index', compact('projects'));
     }
 
-    public function create()
+    /**
+     * @return object
+     */
+    public function create(): object
     {
         return view('project.create');
     }
 
-    public function store (ProjectRequest $request)
+    /**
+     * @param ProjectRequest $request
+     *
+     * @return object
+     */
+    public function store (ProjectRequest $request) : object
     {
         $input = $request->all();
         $input['created_by'] = Auth::id();
-        // return $input;
-        $result = $this->service->store($input);
+        $this->service->store($input);
         return redirect()->route('project')->with('status', 'The project has been created successfully');
     }
 
-    public function edit (Project $project)
+    /**
+     * @param Project $project
+     *
+     * @return object
+     */
+    public function edit (Project $project) : object
     {
         return view('project.edit', compact('project'));
     }
 
-    public function update(ProjectRequest $request, Project $project)
+    /**
+     * @param ProjectRequest $request
+     * @param Project $project
+     *
+     * @return object
+     */
+    public function update(ProjectRequest $request, Project $project) : object
     {
         $input = $request->all();
-        $result = $this->service->update($input, $project);
+        $this->service->update($input, $project);
         return redirect()->route('project')->with('status', 'The project has been updated successfully');
     }
 
-    public function delete (Project $project)
+    /**
+     * @param Project $project
+     *
+     * @return object
+     */
+    public function delete (Project $project): object
     {
-        $result = $this->service->delete($project);
+        $this->service->delete($project);
         return redirect()->route('project')->with('status', 'The project has been successfully deleted');
     }
 }
