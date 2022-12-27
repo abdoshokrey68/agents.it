@@ -3,15 +3,16 @@
 # About Project
 
 ## Requirements
-1. run command
+1. Download and upload the attached database
+2. Or you can run command
 > `php artisan migrate`
-2. run command 
+3. Run Command 
 > `php artisan passport:keys `
-3. Or you can upload the attached database
+
 
 ### Notes 
 - To get the rank of admin you can just send ` is_admin = 1 ` in the registration API in the collection
-- Or you can log in with the account email : `admin@admin.com`  password: `123456789`
+- Or If you have uploaded the database you can log in with the account email : `admin@admin.com`  password: `123456789`
 
 ### Admin
 1. He can add, delete or modify a project
