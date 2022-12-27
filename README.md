@@ -7,6 +7,8 @@
 2. Or you can run command
 > `php artisan migrate`
 3. Run Command 
+> `composer install`
+4. Run Command 
 > `php artisan passport:keys `
 
 
