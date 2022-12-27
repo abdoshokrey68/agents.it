@@ -32,7 +32,7 @@
 ### Postman Collection 
  [Postman](https://documenter.getpostman.com/view/14567016/2s8Z6x3DhK)
  
- And Click
+Enter The Url And Click
  > Run In Postman 
 
 ### Thanks for your time ❤😁
