@@ -9,6 +9,8 @@
 3. Run Command 
 > `composer install`
 4. Run Command 
+> `npm install && npm run dev`
+5. Run Command 
 > `php artisan passport:keys `
 
 
